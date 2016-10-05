@@ -49,7 +49,7 @@ callStatement           : ID arguments
 ;
 returnStatement         : 'return' expr
 ;
-blockStatement          : '{' closedStatement ';' closedStatement*  '}'
+blockStatement          : '{' closedStatement ';' (closedStatement ';')*  '}'
 ;
 print_string 		: 'print_string' '(' STRING ')'
 ;
