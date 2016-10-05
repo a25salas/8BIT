@@ -5,11 +5,14 @@
 grammar EightBit;
 
 // START
-eightProgram       : eightFunction+ 
+eightProgram       : eightFunction+ eightMain
 ;
 ////////////////////////////////////////////////////////////////////////
 // FUN
 eightFunction      : 'fun' id formals funBody 
+;
+
+eightMain      : 'fun' 'main' formals funBody 
 ;
 
 formals            : '(' idList? ')'
@@ -53,7 +56,7 @@ blockStatement          : '{' closedStatement ';' (closedStatement ';')*  '}'
 ;
 print_string 		: 'print_string' '(' STRING ')'
 ;
-print_number 		: 'print_number' '(' ID '('NUMBER ',' NUMBER')' ')'
+print_number 		: 'print_number' '(' callStatement ')'
 ;
 //////////////////////////////////////////////////////////////////////////////////
 // EXPRESSION
@@ -74,6 +77,7 @@ arithMonom      : arithSingle ((oper = '*' | '/')  arithSingle)*
 arithSingle     :  '-' arithOperation
                    | '(' expr ')'
 				   | ID arguments? 
+				| constant
 		           
 ;
 constant        :    NUMBER  #ExprNum 
