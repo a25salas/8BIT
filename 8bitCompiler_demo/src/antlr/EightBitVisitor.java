@@ -125,6 +125,12 @@ public interface EightBitVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrint_number(EightBitParser.Print_numberContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link EightBitParser#print_boolean}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint_boolean(EightBitParser.Print_booleanContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link EightBitParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

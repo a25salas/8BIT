@@ -41,6 +41,8 @@ closedStatement     : assignStatement
 					| blockStatement 
 					| print_string
 					| print_number
+					| print_boolean
+					| letStatement
 ;
 assignStatement         : ID '=' expr
 ;
@@ -54,10 +56,12 @@ returnStatement         : 'return' expr
 ;
 blockStatement          : '{' closedStatement ';' (closedStatement ';')*  '}'
 ;
-print_string 		: 'print_string' '(' STRING ')'
+print_string 		: 'print_string' '(' expr')'
 ;
-print_number 		: 'print_number' '(' callStatement ')'
+print_number 		: 'print_number' '('callStatement')'
 ;
+print_boolean		: 'print_boolean' '(' callStatement ')'
+;	
 //////////////////////////////////////////////////////////////////////////////////
 // EXPRESSION
 expr            : relMonom ('||' relMonom)*
