@@ -8,7 +8,7 @@ public class JSPrintNumber implements JSAst{
       this.e = e;
    }
    public void genCode(PrintStream out){
-	   out.format("console.log("); 
+	   out.format("Number.console.log("); 
 	// this.e.genCode(out); 
 	 out.format(")"); 
 	  out.format(";"); 

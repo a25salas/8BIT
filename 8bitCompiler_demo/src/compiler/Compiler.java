@@ -58,6 +58,7 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
    
     @Override
    public JSAst visitPrint_string(EightBitParser.Print_stringContext ctx){
+   System.err.print("valor string:"+ctx.expr().getText()+"\n");
       return PRINTSTRING(visit(ctx.expr()));
 	                
    }
@@ -132,12 +133,20 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 	}
    @Override
    public JSAst visitArithIdSingle(EightBitParser.ArithIdSingleContext ctx){
+      //System.err.print("args:"+ctx.arguments().getText()+"\n");
       return visit(ctx.id()); // ignoring by now arguments!!
    }
    @Override
    public JSAst visitExprNum(EightBitParser.ExprNumContext ctx){
       return NUM(Double.valueOf(ctx.NUMBER().getText()));
    }
+   
+   
+   @Override
+   public JSAst visitExprString(EightBitParser.ExprStringContext ctx){
+      return STRING(String.valueOf(ctx.STRING().getText()));
+   }
+   
    @Override
    public JSAst visitExprTrue(EightBitParser.ExprTrueContext ctx){
       return TRUE;

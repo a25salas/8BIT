@@ -18,6 +18,8 @@ public interface JSEmiter{
    
    default JSId  ID(String value){return new JSId(value);}
    
+    default JSString  STRING(String value){return new JSString(value);}
+   
    default JSFunction FUNCTION(JSId id, List<JSAst> formals, JSAst body){
            return new JSFunction(id, formals, body);
    }
@@ -30,8 +32,8 @@ public interface JSEmiter{
     default JSPrintString PRINTSTRING(JSAst c){
        return new JSPrintString(c);
    }
-   default JSPrintString PRINTNUMBER(JSAst c){
-       return new JSPrintString(c);
+   default JSPrintNumber PRINTNUMBER(JSAst c){
+       return new JSPrintNumber(c);
    }
    
    

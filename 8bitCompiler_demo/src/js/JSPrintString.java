@@ -8,8 +8,9 @@ public class JSPrintString implements JSAst{
       this.e = e;
    }
    public void genCode(PrintStream out){
-	   out.format("console.log("); 
-	// this.e.genCode(out); 
+	   out.format("String.console.log("); 
+	   //out.print(this.e);
+	//this.e.genCode(out); 
 	 out.format(")"); 
 	  out.format(";"); 
    }
