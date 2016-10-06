@@ -27,6 +27,14 @@ public interface JSEmiter{
        return new JSIf(c, e, t);
    }
    
+    default JSPrintString PRINTSTRING(JSAst c){
+       return new JSPrintString(c);
+   }
+   default JSPrintString PRINTNUMBER(JSAst c){
+       return new JSPrintString(c);
+   }
+   
+   
    default JSCall CALL(JSAst f, List<JSAst> args){
        return new JSCall(f, args);
    }

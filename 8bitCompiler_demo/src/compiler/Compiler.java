@@ -55,6 +55,19 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
       return RET(visit(ctx.expr()));
 	                
    }
+   
+    @Override
+   public JSAst visitPrint_string(EightBitParser.Print_stringContext ctx){
+      return PRINTSTRING(visit(ctx.expr()));
+	                
+   }
+   
+   @Override
+   public JSAst visitPrint_number(EightBitParser.Print_numberContext ctx){
+      return PRINTNUMBER(visit(ctx.callStatement()));
+	                
+   }
+   
    @Override
    public JSAst visitAssignStatement(EightBitParser.AssignStatementContext ctx){
 	  return ASSIGN(visit(ctx.id()), visit(ctx.expr()));
