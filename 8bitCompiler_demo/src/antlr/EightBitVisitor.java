@@ -23,12 +23,6 @@ public interface EightBitVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEightFunction(EightBitParser.EightFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link EightBitParser#eightMain}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEightMain(EightBitParser.EightMainContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link EightBitParser#formals}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -113,6 +107,12 @@ public interface EightBitVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlockStatement(EightBitParser.BlockStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link EightBitParser#closedList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClosedList(EightBitParser.ClosedListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link EightBitParser#print_string}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -167,11 +167,33 @@ public interface EightBitVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithMonom(EightBitParser.ArithMonomContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link EightBitParser#arithSingle}.
+	 * Visit a parse tree produced by the {@code ArithMinusSingle}
+	 * labeled alternative in {@link EightBitParser#arithSingle}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArithSingle(EightBitParser.ArithSingleContext ctx);
+	T visitArithMinusSingle(EightBitParser.ArithMinusSingleContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArithParsSingle}
+	 * labeled alternative in {@link EightBitParser#arithSingle}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithParsSingle(EightBitParser.ArithParsSingleContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArithIdSingle}
+	 * labeled alternative in {@link EightBitParser#arithSingle}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithIdSingle(EightBitParser.ArithIdSingleContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ArithConstantSingle}
+	 * labeled alternative in {@link EightBitParser#arithSingle}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithConstantSingle(EightBitParser.ArithConstantSingleContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code ExprNum}
 	 * labeled alternative in {@link EightBitParser#constant}.

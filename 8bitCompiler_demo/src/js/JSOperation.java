@@ -1,4 +1,5 @@
 package eightBit.js;
+import java.io.*;
 public class JSOperation implements  JSAst{
    private JSAst oper;
    private JSAst left, right;
@@ -7,5 +8,9 @@ public class JSOperation implements  JSAst{
 	  this.left = left;
 	  this.right = right;
    }
-   
+   public void genCode(PrintStream out){
+      left.genCode(out);
+	  oper.genCode(out);
+	  right.genCode(out);
+   }
 }

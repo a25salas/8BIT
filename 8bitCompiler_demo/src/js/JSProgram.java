@@ -14,6 +14,6 @@ public class JSProgram implements JSAst{
 	  this.name = name;
    }
    public void genCode(PrintStream out){
-       functions.stream().forEach( t -> t.genCode());
+       functions.stream().forEach( t -> t.genCode(out));
    }
 }

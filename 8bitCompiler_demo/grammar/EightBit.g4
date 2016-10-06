@@ -5,15 +5,16 @@
 grammar EightBit;
 
 // START
-eightProgram       : eightFunction+ eightMain
+eightProgram       : eightFunction +
 ;
+
+// en eightProgram + eightMain quitado por mientras
 ////////////////////////////////////////////////////////////////////////
 // FUN
 eightFunction      : 'fun' id formals funBody 
 ;
-
-eightMain      : 'fun' 'main' formals funBody 
-;
+//eightMain      : 'fun' 'main' formals funBody 
+//;
 
 formals            : '(' idList? ')'
 ;
@@ -31,7 +32,7 @@ emptyStatement       : ';'
 ;
 letStatement       : 'let' '{'  assignStmtList? '}' closedStatement
 ;
-assignStmtList     : assignStatement ';' assignStatement*
+assignStmtList     : assignStatement (';' assignStmtList)*
 ;
 closedStatement     : assignStatement  
                     | whileStatement  
@@ -42,9 +43,8 @@ closedStatement     : assignStatement
 					| print_string
 					| print_number
 					| print_boolean
-					| letStatement
 ;
-assignStatement         : ID '=' expr
+assignStatement         : id '=' expr
 ;
 whileStatement          : 'while' '('  expr ')' closedStatement
 ;
@@ -54,14 +54,16 @@ callStatement           : ID arguments
 ;
 returnStatement         : 'return' expr
 ;
-blockStatement          : '{' closedStatement ';' (closedStatement ';')*  '}'
+blockStatement          : '{' closedList?  '}'
+;
+closedList              : closedStatement ';'? ( closedStatement ';'?)*
 ;
 print_string 		: 'print_string' '(' expr')'
 ;
 print_number 		: 'print_number' '('callStatement')'
 ;
 print_boolean		: 'print_boolean' '(' callStatement ')'
-;	
+;
 //////////////////////////////////////////////////////////////////////////////////
 // EXPRESSION
 expr            : relMonom ('||' relMonom)*
@@ -78,10 +80,11 @@ arithOperation  : arithMonom  (oper = ('+' | '-')  arithMonom)*
 ;
 arithMonom      : arithSingle ((oper = '*' | '/')  arithSingle)*
 ;
-arithSingle     :  '-' arithOperation
-                   | '(' expr ')'
-				   | ID arguments? 
-				| constant
+arithSingle     :  '-' arithOperation #ArithMinusSingle
+                   | '(' expr ')'     #ArithParsSingle
+				   | id arguments?    #ArithIdSingle
+				   | constant         #ArithConstantSingle
+				   
 		           
 ;
 constant        :    NUMBER  #ExprNum 
@@ -99,7 +102,7 @@ args   :  expr (',' expr)*
 ///////////////////////////////////////////////////////////////////////
 // LEXER
 
-NUMBER : INTEGER? 
+NUMBER : ('-')? INTEGER ('.' INTEGER)? 
 ;
 fragment INTEGER : [0-9]+ ;
 

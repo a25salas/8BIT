@@ -1,1 +1,1 @@
-function main(){
+function helloWorld(s){ds=s+s;return ds;};

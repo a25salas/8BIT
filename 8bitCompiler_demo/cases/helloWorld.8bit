@@ -1,4 +1,2 @@
-fun main(){
-	print_string("Hello World!");
-	
-}
+// Caso Demo
+fun helloWorld(s){ ds = s + s return ds;}

@@ -49,12 +49,35 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
       return EMPTY();
 	                
    }
+   
+   @Override
+   public JSAst visitReturnStatement(EightBitParser.ReturnStatementContext ctx){
+      return RET(visit(ctx.expr()));
+	                
+   }
+   @Override
+   public JSAst visitAssignStatement(EightBitParser.AssignStatementContext ctx){
+	  return ASSIGN(visit(ctx.id()), visit(ctx.expr()));
+	                
+   }
    @Override
    public JSAst visitBlockStatement(EightBitParser.BlockStatementContext ctx){
-      return BLOCK(ctx.closedStatement().stream()
-	                                    .map( c -> visit(c))
-										.collect(Collectors.toList()));
+	  EightBitParser.ClosedListContext closedList = ctx.closedList();
+      return (closedList == null ) ? BLOCK() 
+	                               : visit(closedList);
+   }
+   @Override
+   public JSAst visitClosedList(EightBitParser.ClosedListContext ctx){					  
+					   return  BLOCK(ctx.closedStatement().stream()
+	                                                      .map( c -> visit(c))
+										                  .collect(Collectors.toList()));
 	                
+   }
+   @Override
+   public JSAst visitFormals(EightBitParser.FormalsContext ctx){
+	   EightBitParser.IdListContext idList = ctx.idList();
+	   return (idList == null ) ? BLOCK()
+	                            : visit(idList);
    }
    @Override
    public JSAst visitIdList(EightBitParser.IdListContext ctx){
@@ -69,6 +92,8 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
    }
    @Override
     public JSAst visitArithOperation(EightBitParser.ArithOperationContext ctx) {
+	   if (ctx.oper == null)
+		   return visit(ctx.arithMonom().get(0));
 	   JSAst oper = ( ctx.oper.getType() == EightBitParser.ADD ) ? ADD : MINUS;
        List<JSAst> exprs = ctx.arithMonom().stream()
 	                                       .map( c -> visit(c) )
@@ -79,6 +104,23 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 	                              OPERATION(oper, opers , expr));
 	   
     }
+   @Override
+    public JSAst visitArithMonom(EightBitParser.ArithMonomContext ctx){
+		if (ctx.oper == null)
+		   return visit(ctx.arithSingle().get(0));
+		JSAst oper = ( ctx.oper.getType() == EightBitParser.MUL ) ? MUL : DIV;
+        List<JSAst> exprs = ctx.arithSingle().stream()
+	                                       .map( c -> visit(c) )
+										   .collect(Collectors.toList());
+		return exprs.stream()
+	               .skip(1)
+				   .reduce(exprs.get(0), (opers, expr) ->
+	                              OPERATION(oper, opers , expr));
+	}
+   @Override
+   public JSAst visitArithIdSingle(EightBitParser.ArithIdSingleContext ctx){
+      return visit(ctx.id()); // ignoring by now arguments!!
+   }
    @Override
    public JSAst visitExprNum(EightBitParser.ExprNumContext ctx){
       return NUM(Double.valueOf(ctx.NUMBER().getText()));
