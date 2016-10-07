@@ -50,7 +50,7 @@ whileStatement          : 'while' '('  expr ')' closedStatement
 ;
 ifStatement             : 'if' '('  expr ')' closedStatement ('else' closedStatement)?
 ;
-callStatement           : ID arguments
+callStatement           : id arguments
 ;
 returnStatement         : 'return' expr
 ;

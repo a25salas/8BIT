@@ -37,7 +37,7 @@ public interface JSEmiter{
    }
    
    
-   default JSCall CALL(JSAst f, List<JSAst> args){
+   default JSCall CALL(JSId f, List<JSAst> args){
        return new JSCall(f, args);
    }
    default JSAst OPERATION(JSAst oper, JSAst left, JSAst right){

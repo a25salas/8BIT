@@ -835,7 +835,9 @@ public class EightBitParser extends Parser {
 	}
 
 	public static class CallStatementContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(EightBitParser.ID, 0); }
+		public IdContext id() {
+			return getRuleContext(IdContext.class,0);
+		}
 		public ArgumentsContext arguments() {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
@@ -857,7 +859,7 @@ public class EightBitParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(139);
-			match(ID);
+			id();
 			setState(140);
 			arguments();
 			}
@@ -1933,7 +1935,7 @@ public class EightBitParser extends Parser {
 		"\2\2\u0084\u0085\7\r\2\2\u0085\u0086\7\4\2\2\u0086\u0087\5*\26\2\u0087"+
 		"\u0088\7\5\2\2\u0088\u008b\5\24\13\2\u0089\u008a\7\16\2\2\u008a\u008c"+
 		"\5\24\13\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c\33\3\2\2\2\u008d"+
-		"\u008e\7%\2\2\u008e\u008f\5:\36\2\u008f\35\3\2\2\2\u0090\u0091\7\17\2"+
+		"\u008e\5\n\6\2\u008e\u008f\5:\36\2\u008f\35\3\2\2\2\u0090\u0091\7\17\2"+
 		"\2\u0091\u0092\5*\26\2\u0092\37\3\2\2\2\u0093\u0095\7\t\2\2\u0094\u0096"+
 		"\5\"\22\2\u0095\u0094\3\2\2\2\u0095\u0096\3\2\2\2\u0096\u0097\3\2\2\2"+
 		"\u0097\u0098\7\n\2\2\u0098!\3\2\2\2\u0099\u009b\5\24\13\2\u009a\u009c"+

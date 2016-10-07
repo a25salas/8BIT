@@ -1,1 +1,1 @@
-function add(xy){return x+y;};function main(){String.console.log();Number.console.log();};
+function add(xy){return x+y;};function main(){printString("10+56=");printNumber(add(10.056.0));};

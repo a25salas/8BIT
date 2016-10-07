@@ -58,7 +58,6 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
    
     @Override
    public JSAst visitPrint_string(EightBitParser.Print_stringContext ctx){
-   System.err.print("valor string:"+ctx.expr().getText()+"\n");
       return PRINTSTRING(visit(ctx.expr()));
 	                
    }
@@ -87,6 +86,35 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 										                  .collect(Collectors.toList()));
 	                
    }
+   
+  @Override
+   public JSAst  visitCallStatement (EightBitParser.CallStatementContext ctx){					  
+		
+		JSId id = (JSId)visit(ctx.id());
+	  JSAst f = visit(ctx.arguments());
+	  JSAst call = CALL(id, ARGS(f));
+		return call;	 
+	                
+   }
+   
+    @Override
+   public JSAst  visitArguments (EightBitParser.ArgumentsContext ctx){					  
+		 
+		 return visit(ctx.args());
+	                
+   }
+   
+     @Override
+   public JSAst  visitArgs (EightBitParser.ArgsContext ctx){	
+		//ctx.expr().stream().forEach(c-> System.err.print("valor arg:"+c.getText()+"\n"));
+	                                                      
+		 return BLOCK(ctx.expr().stream()
+						     .map( c -> visit(c))
+						     .collect(Collectors.toList()));
+   }
+   
+   
+   
    @Override
    public JSAst visitFormals(EightBitParser.FormalsContext ctx){
 	   EightBitParser.IdListContext idList = ctx.idList();
@@ -102,6 +130,7 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
    } 
    @Override
    public JSAst visitId(EightBitParser.IdContext ctx){
+	   // System.err.print("valor id:"+ctx.ID().getText()+"\n");
 	  return  ID(ctx.ID().getText());
    }
    @Override
@@ -133,17 +162,18 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 	}
    @Override
    public JSAst visitArithIdSingle(EightBitParser.ArithIdSingleContext ctx){
-      //System.err.print("args:"+ctx.arguments().getText()+"\n");
       return visit(ctx.id()); // ignoring by now arguments!!
    }
    @Override
    public JSAst visitExprNum(EightBitParser.ExprNumContext ctx){
+	   System.err.print("valor num:"+ctx.NUMBER().getText()+"\n");
       return NUM(Double.valueOf(ctx.NUMBER().getText()));
    }
    
    
    @Override
    public JSAst visitExprString(EightBitParser.ExprStringContext ctx){
+	System.err.print("valor string:"+ctx.STRING().getText()+"\n");
       return STRING(String.valueOf(ctx.STRING().getText()));
    }
    
