@@ -81,11 +81,38 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 	      
       }*/
 	  JSAst t = visit(ctx.closedStatement().get(0));
-	  JSAst e = visit(ctx.closedStatement().get(1));
+	 JSAst e = visit(ctx.closedStatement().get(1));
 	  JSAst ifs = IF(i,t,e);
 		return ifs;
 	                
    }
+   
+   @Override
+   public JSAst visitWhileStatement (EightBitParser.WhileStatementContext ctx){
+      JSAst i = visit(ctx.expr());
+      /*if(ctx.closedStatement().size()==2){
+	      
+      }*/
+	  JSAst t = visit(ctx.closedStatement());
+	  JSAst ifs = WHILE(i,t);
+		return ifs;
+	                
+   }
+   
+      public JSAst   visitRelOperation (EightBitParser.RelOperationContext ctx){
+	     //return visit(ctx.relOperator().get(0));
+	   return BLOCK(ctx.arithOperation().stream()
+						     .map( c -> visit(c))
+						     .collect(Collectors.toList()));  
+	/*  JSAst l = visit(ctx.arithOperation().get(0));
+	  System.err.print("valor arith:"+l.getText()+"\n");
+	  JSAst r = visit(ctx.arithOperation().get(1));
+	  JSAst o = visit(ctx.relOperator().get(0));
+	  
+	        return OPERATION(o,l,r); */       
+   }
+   
+   
    
    
    @Override

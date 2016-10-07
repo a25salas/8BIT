@@ -29,6 +29,11 @@ public interface JSEmiter{
        return new JSIf(c, e, t);
    }
    
+   default JSWhile WHILE(JSAst c, JSAst t){
+       return new JSWhile(c, t);
+   }
+   
+   
     default JSPrintString PRINTSTRING(JSAst c){
        return new JSPrintString(c);
    }

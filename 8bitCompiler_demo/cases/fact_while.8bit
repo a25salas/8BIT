@@ -1,6 +1,6 @@
 fun fact(n){
   let {
-     f = 1;
+     f = 1
   }
   {
      while(n > 0){
@@ -9,7 +9,7 @@ fun fact(n){
 	 }
 	 return f;
   }
-  ;}  // el punto y coma no estaba
+  }  // el punto y coma no estaba
 
 fun main(){
    print_string("fact(5)=");

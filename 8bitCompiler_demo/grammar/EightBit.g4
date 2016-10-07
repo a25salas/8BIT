@@ -43,6 +43,7 @@ closedStatement     : assignStatement
 					| print_string
 					| print_number
 					| print_boolean
+					| letStatement
 ;
 assignStatement         : id '=' expr
 ;
