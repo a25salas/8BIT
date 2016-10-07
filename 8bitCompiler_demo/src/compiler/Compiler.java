@@ -69,6 +69,26 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
    }
    
    @Override
+   public JSAst visitPrint_boolean(EightBitParser.Print_booleanContext ctx){
+      return PRINTBOOLEAN(visit(ctx.callStatement()));
+	                
+   }
+   
+   @Override
+   public JSAst visitIfStatement (EightBitParser.IfStatementContext ctx){
+      JSAst i = visit(ctx.expr());
+      /*if(ctx.closedStatement().size()==2){
+	      
+      }*/
+	  JSAst t = visit(ctx.closedStatement().get(0));
+	  JSAst e = visit(ctx.closedStatement().get(1));
+	  JSAst ifs = IF(i,t,e);
+		return ifs;
+	                
+   }
+   
+   
+   @Override
    public JSAst visitAssignStatement(EightBitParser.AssignStatementContext ctx){
 	  return ASSIGN(visit(ctx.id()), visit(ctx.expr()));
 	                

@@ -36,6 +36,9 @@ public interface JSEmiter{
        return new JSPrintNumber(c);
    }
    
+    default JSPrintBoolean PRINTBOOLEAN(JSAst c){
+       return new JSPrintBoolean(c);
+   }
    
    default JSCall CALL(JSId f, List<JSAst> args){
        return new JSCall(f, args);

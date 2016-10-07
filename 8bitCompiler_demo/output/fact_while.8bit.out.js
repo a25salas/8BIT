@@ -1,0 +1,1 @@
+function fact(n){};function main(){printString("fact(5)=");printNumber(fact(5.0));};

@@ -1,0 +1,1 @@
+function compare(xy){if(y)return false;else return true;;};function main(){printString("10>5=");printBool(compare(10.05.0));printString(" 5>10=");printBool(compare(5.010.0));};

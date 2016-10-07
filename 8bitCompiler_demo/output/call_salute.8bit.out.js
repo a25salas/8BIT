@@ -1,0 +1,1 @@
+function salute(s){printString(s);};function main(){salute("Hello 666!")};
