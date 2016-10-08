@@ -15,14 +15,15 @@ public class JSMain implements JSAst{
 	
    }
    public void genCode(PrintStream out){
-       out.format("function MAIN(");
+	   
+       out.format("function MAIN( ");
 	   if (this.formals != null)
 	      this.formals
 	          .stream()
 	          .filter(f -> f != null)
 	          .forEach(f -> f.genCode(out));
 	  
-	   out.print("){");
+	   out.print("){ \n");
 	   if (this.body != null)
 	      this.body.genCode(out);
 	   out.print("};");

@@ -14,6 +14,10 @@ public class JSProgram implements JSAst{
 	  this.name = name;
    }
    public void genCode(PrintStream out){
+	out.format("\n");
+	   out.format(".init:\n");
+	out.format("MOV D, 232\n");
+	out.format("JMP main\n");
        functions.stream().forEach( t -> t.genCode(out));
    }
 }
