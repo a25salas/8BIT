@@ -32,6 +32,7 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
    public JSAst visitEightProgram(EightBitParser.EightProgramContext ctx){
 	   ctx.eightFunction().stream()
 	                      .forEach( fun -> visit(fun) );
+	   visit(ctx.eightMain());
 	   return this.program = PROGRAM(this.statements);
    }
    @Override
@@ -44,6 +45,16 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 	  this.statements.add(function);
 	  return function;
    }
+   
+      public JSAst visitEightMain(EightBitParser.EightMainContext ctx){
+      System.err.print(" entre\n");
+	  JSAst f = visit(ctx.formals());
+	  JSAst body = visit(ctx.funBody());
+	  JSAst function = MAIN(FORMALS(f), body);
+	  this.statements.add(function);
+	  return function;
+   }
+   
    @Override
    public JSAst visitEmptyStatement(EightBitParser.EmptyStatementContext ctx){
       return EMPTY();

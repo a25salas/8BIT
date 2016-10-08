@@ -5,7 +5,7 @@
 grammar EightBit;
 
 // START
-eightProgram       : eightFunction +
+eightProgram       : eightFunction + eightMain
 ;
 
 // en eightProgram + eightMain quitado por mientras
@@ -13,8 +13,9 @@ eightProgram       : eightFunction +
 // FUN
 eightFunction      : 'fun' id formals funBody 
 ;
-//eightMain      : 'fun' 'main' formals funBody 
-//;
+
+eightMain      : 'fun' 'main' formals funBody 
+;
 
 formals            : '(' idList? ')'
 ;

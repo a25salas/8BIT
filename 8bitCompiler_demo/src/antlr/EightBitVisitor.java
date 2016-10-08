@@ -23,6 +23,12 @@ public interface EightBitVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEightFunction(EightBitParser.EightFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link EightBitParser#eightMain}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEightMain(EightBitParser.EightMainContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link EightBitParser#formals}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -24,6 +24,10 @@ public interface JSEmiter{
            return new JSFunction(id, formals, body);
    }
    
+    default JSMain MAIN(List<JSAst> formals, JSAst body){
+           return new JSMain(formals, body);
+   }
+   
    
    default JSIf IF(JSAst c, JSAst t, JSAst e){
        return new JSIf(c, e, t);
