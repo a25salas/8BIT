@@ -109,7 +109,17 @@ public class Compiler extends EightBitBaseVisitor<JSAst> implements JSEmiter{
 		return ifs;
 	                
    }
-   
+   @Override
+   public JSAst visitForStatement (EightBitParser.ForStatementContext ctx){
+      JSAst f1 = visit(ctx.expr().get(0));
+	  JSAst f2 = visit(ctx.expr().get(1));
+	  JSAst f3 = visit(ctx.expr().get(2));
+      
+	  JSAst s1 = visit(ctx.closedStatement());
+	  JSAst faux = FOR(f1,f2,f3,s1);
+		return faux;
+	                
+   }
       public JSAst   visitRelOperation (EightBitParser.RelOperationContext ctx){
 	     //return visit(ctx.relOperator().get(0));
 	   return BLOCK(ctx.arithOperation().stream()

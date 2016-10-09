@@ -37,7 +37,9 @@ public interface JSEmiter{
        return new JSWhile(c, t);
    }
    
-   
+   default JSFor FOR(JSAst f1, JSAst f2,JSAst f3, JSAst s1){
+       return new JSFor(f1,f2,f3,s1);
+   } 
     default JSPrintString PRINTSTRING(JSAst c){
        return new JSPrintString(c);
    }

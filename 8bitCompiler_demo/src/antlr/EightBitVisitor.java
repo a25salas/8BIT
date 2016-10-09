@@ -95,6 +95,12 @@ public interface EightBitVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStatement(EightBitParser.IfStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link EightBitParser#forStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStatement(EightBitParser.ForStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link EightBitParser#callStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

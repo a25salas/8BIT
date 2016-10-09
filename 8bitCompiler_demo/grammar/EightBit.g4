@@ -52,6 +52,8 @@ whileStatement          : 'while' '('  expr ')' closedStatement
 ;
 ifStatement             : 'if' '('  expr ')' closedStatement ('else' closedStatement)?
 ;
+forStatement            : 'for' '(' expr ';'expr';'expr ')' closedStatement
+;
 callStatement           : id arguments
 ;
 returnStatement         : 'return' expr
