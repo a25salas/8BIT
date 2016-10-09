@@ -8,23 +8,19 @@ public class JSPrintString implements JSAst{
       this.e = e;
    }
    public void genCode(PrintStream out){
-	  
-out.format("print_string:\n");
-out.format("POP C ; c= pos de ret print str\n");   
-out.format("POP B ; B= pos de ret salute\n");    
-out.format("POP A ; Saca .main_salute\n");    
-out.format("PUSH B\n");    
-out.format("PUSH C\n") ;   
-out.format(".print_string_loop_01:\n");
-out.format("MOV C, [A] ; Ahora .main_salute està en A\n")   ; 
-out.format(" CMP C, 0\n")  ;
-out.format("JE .print_string_exit\n")    ;
-out.format("JE .print_string_exit\n")    ;
-out.format("INC D\n")    ;
-out.format(" INC A\n")   ;
-out.format(" JMP .print_string_loop_01\n")   ;
-out.format(".print_string_exit:\n");
-out.format("RET ; Vuelve a salute\n") ;   
+	 out.format("; Data Area\n");  
+ out.format(".main_data: \n");
+ out.format(".UNDEF: DB 255 \n");
+ out.format(".main_string_01: DB ");
+	this.e.genCode(out);
+	out.format("\n");
+	out.format("DB 0\n");
+	   
+	   out.format("main: \n");
+	   out.format("PUSH .main_string_01 \n");
+	 out.format("CALL print_string \n");
+	 out.format("POP A\n");
+
 	   /*
 	   out.format("printString("); 
 	   //out.print(this.e);

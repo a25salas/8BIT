@@ -5,7 +5,7 @@
 grammar EightBit;
 
 // START
-eightProgram       : eightFunction + eightMain
+eightProgram       : eightFunction * eightMain
 ;
 
 // en eightProgram + eightMain quitado por mientras
