@@ -15,17 +15,20 @@ public class JSCall implements JSAst{
       this.args = args;
 	  
    }
-    public void genCode(PrintStream out){
+      public void genCode(PrintStream out){
       // this.f.genCode(out); 
-	out.format(this.f.getValue());
-       out.format("(");
-	   if (this.args != null)
+	
+       out.format("CALL .");
+	   out.format(this.f.getValue());
+	   out.format(";\n");
+	   
+	   /*if (this.args != null)
 	      this.args
 	          .stream()
 	          .filter(f -> f != null)
 	          .forEach(f -> f.genCode(out));
 	out.format(")");
-     
+     */
 	  
    }
 }

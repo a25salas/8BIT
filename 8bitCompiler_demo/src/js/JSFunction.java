@@ -17,7 +17,7 @@ public class JSFunction implements JSAst{
 	  this.name = name;
    }
    public void genCode(PrintStream out){
-       out.format("function %s(", this.name.getValue());
+       out.format(".%s(", this.name.getValue());
 	   if (this.formals != null)
 	      this.formals
 	          .stream()
