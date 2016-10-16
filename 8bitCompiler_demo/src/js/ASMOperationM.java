@@ -1,6 +1,8 @@
+package eightBit.js;
+import java.io.PrintStream;
+
 public class ASMOperationM implements  ASMAst{
-   private ASMAst oper;
-   private ASMAst left, right;
+   private ASMAst left, right,oper;
    public ASMOperationM(ASMAst oper, ASMAst left, ASMAst right){
       this.oper = oper;
 	  this.left = left;

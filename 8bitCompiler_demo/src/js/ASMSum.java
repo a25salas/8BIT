@@ -1,3 +1,6 @@
+package eightBit.js;
+import java.io.PrintStream;
+
 public class ASMSum extends ASMAtom<Double>{
    public ASMSum(Double value){
       super(value);

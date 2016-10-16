@@ -10,6 +10,8 @@ private ASMAst left, right;
    public void genCode(PrintStream out){
       left.genCode(out);
 	  right.genCode(out);
+	  out.print("POP B");
+	  out.print("POP A");
 	  out.print("MOV A,B");
 	  out.print("PUSH A");
 	  

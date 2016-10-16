@@ -1,3 +1,6 @@
+package eightBit.js;
+import java.io.PrintStream;
+
 public class ASMRes extends ASMAtom<Double>{
    public ASMRes(Double value){
       super(value);

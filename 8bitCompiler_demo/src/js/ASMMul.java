@@ -1,7 +1,11 @@
-public class ASMMul extends ASMAtom<Double>{
-   public ASMMul(Double value){
-      super(value);
-   }
+package eightBit.js;
+import java.io.PrintStream;
+
+public class ASMMul extends ASMAtom<String>{
+	
+	public ASMMul(String op)
+	{super(op);}
+	
     public void genCode(PrintStream out){
        out.format("POP B \n");
 	   out.format("POP A \n");

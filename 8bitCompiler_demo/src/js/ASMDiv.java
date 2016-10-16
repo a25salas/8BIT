@@ -1,3 +1,6 @@
+package eightBit.js;
+import java.io.PrintStream;
+
 public class ASMDiv extends ASMAtom<Double>{
    public ASMDiv(Double value){
       super(value);
