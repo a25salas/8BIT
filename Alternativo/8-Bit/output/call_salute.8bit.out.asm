@@ -3,8 +3,11 @@
 .init:
 	MOV D, 232
 	JMP .main
+	;    DATA AREA    ;
+data:
+	 DB salute : s
 .salute: 
-.salute_[params]: DB "s"
+.salute_0: DB s
 .strs:
 	DB s
 	DB 0
@@ -22,5 +25,5 @@
 	JMP .printLoop
 .printDone:
 .main: 
-CALL .salute;
+	CALL .salute;
 	HLT

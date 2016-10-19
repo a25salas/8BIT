@@ -15,19 +15,9 @@ public class ASMCall implements ASMAst{
         this.args = args; 
     }
     public void genCode(PrintStream out){
-      // this.f.genCode(out); 
-	
-        out.format("CALL .");
+      
+        out.format("\tCALL .");
         out.format(this.f.getValue());
         out.format(";\n");
-	   
-	   /*if (this.args != null)
-	      this.args
-	          .stream()
-	          .filter(f -> f != null)
-	          .forEach(f -> f.genCode(out));
-	out.format(")");
-     */
-	  
    }
 }

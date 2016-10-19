@@ -6,9 +6,9 @@ public class ASMOperation implements  ASMAst{
     protected ASMAst left, right;
     
     public ASMOperation(ASMAst oper, ASMAst left, ASMAst right){
-       this.oper = oper;
-	     this.left = left;
-	     this.right = right;
+        this.oper = oper;
+	    this.left = left;
+	    this.right = right;
     }
 
     public void genCode(PrintStream out){

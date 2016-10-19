@@ -2,15 +2,16 @@ package eightBit.asm;
 import java.io.PrintStream;
 
 public class ASMSum extends ASMOperation{
-
-   	public ASMSum(Integer left, Integer right){
-   		super(new ASMAtom(left),new ASMId("+"),new ASMAtom(right));
-   	}
     
+	public ASMSum(ASMAst op, ASMAst le, ASMAst ri){
+		super(op, le, ri);
+	}
+
+    @Override
     public void genCode(PrintStream out){
-       	out.format("POP B \n");
-	   	out.format("POP A \n");
-	   	out.format("ADD A,B \n");
-	   	out.format("PUSH A \n");
+       	out.format("\tPOP B \n");
+	   	out.format("\tPOP A \n");
+	   	out.format("\tADD A,B \n");
+	   	out.format("\tPUSH A \n");
 	}
 }

@@ -3,10 +3,14 @@
 .init:
 	MOV D, 232
 	JMP .main
+	;    DATA AREA    ;
+data:
+	 DB fact : n
 .fact: 
-.fact_[params]: DB "n"
-	PUSH f ;
-RET .main: 
+.fact_0: DB n
+	POP A
+	RET 
+.main: 
 .str"fact(5)=":
 	DB "fact(5)="
 	DB 0
@@ -24,7 +28,7 @@ RET .main:
 	JMP .printLoop
 .printDone:
 .printInt:
-	MOV C, CALL .fact;
+	MOV C, 	CALL .fact;
 
 	PUSH 0xFF; Delimitador Stack
 	JMP parse:

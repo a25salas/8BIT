@@ -3,8 +3,11 @@
 .init:
 	MOV D, 232
 	JMP .main
+	;    DATA AREA    ;
+data:
+	 DB compare : xy
 .compare: 
-.compare_[params]: DB "xy"
+.compare_0: DB xy
 .main: 
 .str"10>5=":
 	DB "10>5="
@@ -22,7 +25,7 @@
 	INC A
 	JMP .printLoop
 .printDone:
-printBool(CALL .compare;
+printBool(	CALL .compare;
 );.str" 5>10=":
 	DB " 5>10="
 	DB 0
@@ -39,5 +42,5 @@ printBool(CALL .compare;
 	INC A
 	JMP .printLoop
 .printDone:
-printBool(CALL .compare;
+printBool(	CALL .compare;
 );	HLT

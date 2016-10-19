@@ -9,8 +9,8 @@ import java.util.*;
 
 public interface ASMEmiter {
 
-	default ASMAst PROGRAM(List<ASMAst> functions){
-		return new ASMProgram(functions);
+	default ASMAst PROGRAM(List<ASMAst> functions, Map<ASMAst, ASMAst> vars){
+		return new ASMProgram(functions, vars);
 	}
 
 	default ASMAst BLOCK(List<ASMAst> members){
@@ -64,8 +64,18 @@ public interface ASMEmiter {
    	default ASMCall CALL(ASMId f, List<ASMAst> args){
        	return new ASMCall(f, args);
    	}
+
    	default ASMAst OPERATION(ASMAst oper, ASMAst left, ASMAst right){
-	   	return new ASMOperation(oper, left, right);
+   		if (oper == ADD)
+   			return new ASMSum(oper, left, right);
+   		if(oper == MINUS) 
+   			return new ASMRes(oper, left, right);
+   		if(oper == MUL)
+   			return new ASMMul(oper, left, right);
+   		if(oper == DIV)
+   			return new ASMDiv(oper, left, right);
+   		return new ASMOperation(oper, left, right);
+   		
    	}
 
    	default ASMAst ASSIGN(ASMAst left, ASMAst right){
@@ -93,11 +103,10 @@ public interface ASMEmiter {
 	}
 
 	/*  Necesarios ? */
-	final ASMBool TRUE = new ASMBool(true);
-   	final ASMBool FALSE = new ASMBool(false);
-	final ASMAst ADD = new ASMId("+");
-	final ASMAst MINUS = new ASMId("-");
-	final ASMAst MUL = new ASMId("*");
-	final ASMAst DIV = new ASMId("/");
-	
+	final ASMBool 	TRUE = new ASMBool(true);
+   	final ASMBool 	FALSE = new ASMBool(false);
+	final ASMAst 	ADD = new ASMId("+");
+	final ASMAst 	MINUS = new ASMId("-");
+	final ASMAst	MUL = new ASMId("*");
+	final ASMAst 	DIV = new ASMId("/");	
 }

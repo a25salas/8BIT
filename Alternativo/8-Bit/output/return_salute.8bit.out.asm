@@ -3,10 +3,14 @@
 .init:
 	MOV D, 232
 	JMP .main
+	;    DATA AREA    ;
+data:
+	 DB salute : 
 .salute: 
-.salute_[params]: DB ""
-	PUSH "Hello 666!" ;
-RET .main: 
+.salute_0: DB 
+	POP A
+	RET 
+.main: 
 .strsalute:
 	DB salute
 	DB 0

@@ -10,10 +10,8 @@ public class ASMReturn implements ASMAst{
       	this.e = e;
    	}
    	public void genCode(PrintStream out){
-   		// Coloca valor de 'e' en la pila y hace un RET
-      	out.format("\tPUSH ");
-      	e.genCode();
-      	out.format(" ;\n");
-      	out.format("RET ");
+      	//e.genCode();
+         out.format("\tPOP A\n");
+      	out.format("\tRET \n");
    	}
 }

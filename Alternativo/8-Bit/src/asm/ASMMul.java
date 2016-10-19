@@ -3,8 +3,8 @@ import java.io.PrintStream;
 
 public class ASMMul extends ASMOperation{
 	
-	public ASMMul(Integer left, Integer right){
-		super(new ASMAtom(left),new ASMId("*"),new ASMAtom(right));
+	public ASMMul(ASMAst op, ASMAst le, ASMAst ri){
+		super(op, le, ri);
 	}
 	
     public void genCode(PrintStream out){
