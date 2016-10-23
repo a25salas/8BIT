@@ -39,14 +39,12 @@ public class Compiler extends EightBitBaseVisitor<ASMAst> implements ASMEmiter {
        List<ASMAst> params = FORMALS(f);
 	   ASMAst body = visit(ctx.funBody());
 	   ASMAst function = FUNCTION(id, params, body);
-       params.stream().filter(otherf -> otherf != null).forEach(p -> variables.put(id, p));
 	   this.statements.add(function);
 	   return function;
     }
    
     @Override//**
     public ASMAst visitEightMain(EightBitParser.EightMainContext ctx){
-        System.err.print(" entre\n");
 	    ASMAst f = visit(ctx.formals());
 	    ASMAst body = visit(ctx.funBody());
 	    ASMAst function = MAIN(FORMALS(f), body);
@@ -115,17 +113,9 @@ public class Compiler extends EightBitBaseVisitor<ASMAst> implements ASMEmiter {
 		return faux;
 	                
     }
-      public ASMAst   visitRelOperation (EightBitParser.RelOperationContext ctx){
-	     //return visit(ctx.relOperator().get(0));
-	   return BLOCK(ctx.arithOperation().stream()
-						     .map( c -> visit(c))
-						     .collect(Collectors.toList()));  
-	/*  ASMAst l = visit(ctx.arithOperation().get(0));
-	  System.err.print("valor arith:"+l.getText()+"\n");
-	  ASMAst r = visit(ctx.arithOperation().get(1));
-	  ASMAst o = visit(ctx.relOperator().get(0));
-	  
-	        return OPERATION(o,l,r); */       
+
+    public ASMAst   visitRelOperation (EightBitParser.RelOperationContext ctx){
+	   return BLOCK(ctx.arithOperation().stream().map( c -> visit(c)).collect(Collectors.toList()));   
     }
    
     @Override
@@ -141,8 +131,7 @@ public class Compiler extends EightBitBaseVisitor<ASMAst> implements ASMEmiter {
    
     @Override
     public ASMAst visitClosedList(EightBitParser.ClosedListContext ctx){					  
-	    return  BLOCK(ctx.closedStatement().stream().map( c -> visit(c))
-										                .collect(Collectors.toList()));
+	    return  BLOCK(ctx.closedStatement().stream().map( c -> visit(c)).collect(Collectors.toList()));
 	                
    }
    
@@ -150,8 +139,10 @@ public class Compiler extends EightBitBaseVisitor<ASMAst> implements ASMEmiter {
     public ASMAst  visitCallStatement (EightBitParser.CallStatementContext ctx){					  
 		ASMId id = (ASMId)visit(ctx.id());
 	    ASMAst f = visit(ctx.arguments());
-	    ASMAst call = CALL(id, ARGS(f));
-		return call;	                 
+        List<ASMAst> args = ARGS(f);
+        java.util.stream.IntStream.range(0, args.size()).forEach(idx -> variables.put(new ASMId(id.getValue() + "_" + idx), args.get(idx)));
+	    ASMAst call = CALL(id, args);
+		return call;                 
     }
    
     @Override
@@ -188,8 +179,7 @@ public class Compiler extends EightBitBaseVisitor<ASMAst> implements ASMEmiter {
     public ASMAst visitArithOperation(EightBitParser.ArithOperationContext ctx) {
 	   	if (ctx.oper == null)	return visit(ctx.arithMonom().get(0));
 	   	ASMAst oper = ( ctx.oper.getType() == EightBitParser.ADD ) ? ADD : MINUS;
-       	List<ASMAst> exprs = ctx.arithMonom().stream().map(c -> visit(c))
-										   	          .collect(Collectors.toList());
+       	List<ASMAst> exprs = ctx.arithMonom().stream().map(c -> visit(c)).collect(Collectors.toList());
 	   	return exprs.stream().skip(1).reduce(exprs.get(0), (opers, expr) -> OPERATION(oper, opers , expr)); 
     }
 

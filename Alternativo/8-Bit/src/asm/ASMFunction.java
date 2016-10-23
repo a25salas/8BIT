@@ -20,28 +20,15 @@ public class ASMFunction implements ASMAst {
 		this.body = body;
 	}
 
-
-
-	//IntStream.range(0, formals.size()).forEach(idx -> query.bind( idx, params.get(idx)));
-	
-
-
 	public void genCode(PrintStream out){
 		out.format("." + this.name.getValue() + ": \n");
 		if (this.formals != null)
 			IntStream.range(0, formals.size()).forEach(idx ->{
-				ASMAst f = formals.get(idx);
-				out.format("." + this.name.getValue() + "_" + idx +": ");
-				out.format("DB "); f.genCode(out); out.format("\n");
+				out.format("\tPUSH .%s_%s\n", this.name.getValue(), idx);
 			});
-			/*
-			this.formals.stream().filter(f -> f != null)
-								 .forEach(f ->{
-								 	out.format("." + this.name.getValue() +"_[param#]: ");
-								 	out.format("DB "); f.genCode(out); out.format("\n");
-								 });
-			*/
+		
 		if (this.body != null)
 			this.body.genCode(out);
+		out.format("\tRET\n");
 	}
 }

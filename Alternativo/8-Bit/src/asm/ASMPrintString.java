@@ -11,13 +11,14 @@ public class ASMPrintString implements ASMAst {
 	}
 
 	public void genCode(PrintStream out){
+		/*
 		out.format(".str"); e.genCode(out); out.format(":\n");
-		out.format("\tDB "); e.genCode(out); out.format("\n");
-		out.format("\tDB 0\n");
 		out.format("\tPUSH .str"); e.genCode(out); out.format(":\n");
-		out.format("\tJMP .printStr\n");
+		out.format("\tJMP .printStr\n"); 
+		*/
 		// Este metodo imprime lo que este en A
 		out.format(".printStr:\n");
+		out.format("\tPOP B \n"); //Direccion del CALL
 		out.format("\tPOP A\n");
 		out.format(".printLoop:\n");
 		out.format("\tMOV C, [A]\n");
@@ -28,6 +29,8 @@ public class ASMPrintString implements ASMAst {
 		out.format("\tINC A\n");
 		out.format("\tJMP .printLoop\n");
 		out.format(".printDone:\n");
+		out.format("\tPUSH B\n"); //Reecoloca direccion del CALL
+		out.format("\tRET\n"); // Se devuelve
 		//out.format("\tRET\n"); habria que calcular un PUSH/POP extra
 	}
 }

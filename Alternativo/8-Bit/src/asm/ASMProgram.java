@@ -30,23 +30,25 @@ public class ASMProgram implements ASMAst {
 	}
 
 	public void genDArea(PrintStream out){
-		out.format("\t;    DATA AREA    ;");
+		out.format("\t;    Data Area    ;");
         out.format("\ndata:\n");
-        for (Map.Entry<ASMAst, ASMAst> entry : dArea.entrySet()){
-            out.format("\t DB "); 
-        	entry.getKey().genCode(out);
-        	out.format(" : ");
-        	entry.getValue().genCode(out); 
-        	out.format("\n");
-        }
+        dArea.entrySet().stream().forEach(entry ->{
+        	out.format(".");
+        	entry.getKey(). genCode(out);
+        	out.format(": DB ");
+        	entry.getValue().genCode(out);
+        	out.format("\n\tDB 0\n");
+        });
 	}
 
 	public void genCode(PrintStream out){
-		out.format("\n\t; 8Bit-2-ASM Program ;\n");
-		out.format(".init:\n");
-		out.format("\tMOV D, 232\n");
-		out.format("\tJMP .main\n");
+		out.format("\t; 8Bit-2-ASM Program ;\n");
+        out.format(".init:\n");
+        out.format("\tMOV D, 232\n");
+        out.format("\tJMP .main\n");
 		this.genDArea(out);
+		// Print 8bit-nativo, reutilizable
+		new ASMPrintString(new ASMId("non-existent")).genCode(out);;
 		// Imprime todas las funciones del program (incluyendo ASMMain)
 		functions.stream().forEach(f -> f.genCode(out));
 	}

@@ -13,5 +13,4 @@ public class ASMMul extends ASMOperation{
 	   out.format("MUL B \n");
 	   out.format("PUSH A \n");
 	}
-} //ESE VALUE ESTA SOBRANDO..no se si en ASMOPERATION revisar segun el operador que sea e inyectar el codigo ahi o manejarlo como operadores aparte 
-//que seria como en este caso
+} 

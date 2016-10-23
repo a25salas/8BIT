@@ -16,16 +16,9 @@ public class ASMMain implements ASMAst {
 
 	public void genCode(PrintStream out){
 		out.format(".main: \n");
-		/*
-		// Deberia ser un collection de mainFx (?)
-		out.format("\tCALL mainFx1\n");
-		out.format("\tCALL mainFx2\n");
-		out.format("\tCALL mainFx3\n");
-		out.format("\tCALL mainFx4\n");
-		out.format("\tCALL mainFx5\n");
-		*/
 		if (this.body != null)
 			this.body.genCode(out);	
+		
 		out.format("\tHLT\n");
 	}
 }

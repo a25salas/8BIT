@@ -1,19 +1,13 @@
-
 	; 8Bit-2-ASM Program ;
 .init:
 	MOV D, 232
 	JMP .main
-	;    DATA AREA    ;
+	;    Data Area    ;
 data:
-	 DB salute : s
-.salute: 
-.salute_0: DB s
-.strs:
-	DB s
+.salute_0: DB "Hello 666!"
 	DB 0
-	PUSH .strs:
-	JMP .printStr
 .printStr:
+	POP B 
 	POP A
 .printLoop:
 	MOV C, [A]
@@ -24,6 +18,12 @@ data:
 	INC A
 	JMP .printLoop
 .printDone:
+	PUSH B
+	RET
+.salute: 
+	PUSH .salute_0
+	CALL .printStr
+	RET
 .main: 
 	CALL .salute;
 	HLT

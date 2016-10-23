@@ -15,7 +15,12 @@ public class ASMBlock implements ASMAst {
 	}
 
 	public void genCode(PrintStream out){
-		this.members.stream().filter(t -> t != null)
-							 .forEach(t -> t.genCode(out));
+		this.members.stream().filter(t -> t != null) 
+							 .forEach(t -> { 
+							 	if (t.getClass().getName() == "eightBit.asm.ASMPrintString")
+							 		// Para reutilizar .printStr 
+							 		out.format("\tCALL .printStr\n");
+							 	else t.genCode(out);
+							 });
 	}
 }
