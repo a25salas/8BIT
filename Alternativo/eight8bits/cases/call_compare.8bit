@@ -6,6 +6,6 @@ fun compare(x, y){
 fun main(){
    print_string("10>5=");
    print_boolean(compare(10, 5));
-   print_string(" 5>10=");
+   print_string(" 5>10=")
    print_boolean(compare(5, 10));
 }

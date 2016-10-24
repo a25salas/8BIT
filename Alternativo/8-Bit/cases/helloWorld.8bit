@@ -1,9 +1,0 @@
-// Caso Demo
-//fun helloWorld(s){ ds = s + s return ds;}
-//fun main(){
-//}
-
-
-fun main(){
-	print_string("Hola amigos");	
-}
